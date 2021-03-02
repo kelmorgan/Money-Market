@@ -1,0 +1,22 @@
+<component name="libraryTable">
+  <library name="External lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/dmsapi.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/iforms.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/java-json.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jsf-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/json-simple-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/json.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/ngejbcallbroker.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/log4j-1.2.14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/nglogger.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/omnishared.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/servlet-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/wfdesktop.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/java-json.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="50b917df-92d7-47a8-9712-94a1c2995317" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1pC2TBItvNflibR2GleyiDtOSOC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/wfdesktop.jar!/" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="50b917df-92d7-47a8-9712-94a1c2995317" name="Default Changelist" comment="" />
+      <created>1614672756289</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1614672756289</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1208" y="-49" key="#Notifications" timestamp="1614673166601">
+      <screen x="-1600" y="-137" width="1600" height="860" />
+    </state>
+    <state x="-1208" y="-49" key="#Notifications/0.0.1366.728/-1600.-137.1600.860@-1600.-137.1600.860" timestamp="1614673166601" />
+    <state x="-1208" y="-49" key="#Project_Structure" timestamp="1614673282601">
+      <screen x="-1600" y="-137" width="1600" height="860" />
+    </state>
+    <state x="-1208" y="-49" key="#Project_Structure/0.0.1366.728/-1600.-137.1600.860@-1600.-137.1600.860" timestamp="1614673282601" />
+    <state x="-952" y="181" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1614672972556">
+      <screen x="-1600" y="-137" width="1600" height="860" />
+    </state>
+    <state x="-952" y="181" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1366.728/-1600.-137.1600.860@-1600.-137.1600.860" timestamp="1614672972556" />
+    <state x="-1094" y="34" key="FileChooserDialogImpl" timestamp="1614672874862">
+      <screen x="-1600" y="-137" width="1600" height="860" />
+    </state>
+    <state x="-1094" y="34" key="FileChooserDialogImpl/0.0.1366.728/-1600.-137.1600.860@-1600.-137.1600.860" timestamp="1614672874862" />
+  </component>
+</project>

@@ -18,6 +18,7 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
     @Override
     public void beforeFormLoad(FormDef formDef, IFormReference ifr) {
         try {
+            //checking comment in eclipse
             cpFormLoadActivity(ifr);
         }
         catch (Exception e){

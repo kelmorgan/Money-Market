@@ -18,7 +18,6 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
     @Override
     public void beforeFormLoad(FormDef formDef, IFormReference ifr) {
         try {
-            //checking comment in eclipse
             cpFormLoadActivity(ifr);
         }
         catch (Exception e){
@@ -49,7 +48,7 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
                 case onChange:{
                     switch (controlName){
                         case onChangeProcess: {
-                            selectMarketSheet(ifr);
+                            selectProcessSheet(ifr);
                             break;
                         }
                     }
@@ -66,7 +65,7 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
                 break;
                 case sendMail:{
                     if (getProcess(ifr).equalsIgnoreCase(commercialProcess))
-                        cpMail(ifr);
+                        sendCpMail(ifr);
                 }
             }
         }
@@ -77,17 +76,15 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
         return null;
     }
 
-    private void cpMail(IFormReference ifr){
+    private void sendCpMail(IFormReference ifr){
         String message = "A window open request for Commercial Paper has been Initiated with ref number "+getWorkItemNumber(ifr)+".";
         new MailSetup(ifr,getWorkItemNumber(ifr),getUsersMailsInGroup(ifr,groupName),empty,mailSubject,message);
     }
     private void cpFormLoadActivity(IFormReference ifr){
-        hideProcessMarkets(ifr);
+        hideProcess(ifr);
         hideCpSections(ifr);
-        hideLandingMessageLabel(ifr);
-        String sol = getSol(ifr);
-        ifr.setValue(solLocal, sol);
-        ifr.setValue(loginUserLocal,ifr.getUserName());
+        hideShowLandingMessageLabel(ifr,False);
+        setGenDetails(ifr);
         ifr.setValue(currWsLocal, ifr.getActivityName());
         ifr.setValue(prevWsLocal, na);
         ifr.addItemInCombo(cpDecisionLocal,decSubmit,decSubmit);
@@ -97,6 +94,7 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
         ifr.setStyle(cpMarketSection,visible,True);
         ifr.setStyle(cpSelectMarket,mandatory,True);
         ifr.setStyle(cpLandMsgLocal,mandatory,True);
+        ifr.setStyle(cpDecisionLocal,mandatory,True);
     }
 
     @Override

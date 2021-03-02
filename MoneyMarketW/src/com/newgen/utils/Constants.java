@@ -84,12 +84,12 @@ public interface Constants {
 	String decApprove = "Approve";
 	String decReject = "Reject";
 	String cpProcessName = "Commercial Paper";
-	String dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
+	String dbDateTimeFormat = "yyyy-MM-dd HH:mm:ss";
 	String flag = "Y";
 	String endMail = "@firstbanknigeria.com";
 	String groupName = "T_USERS";
 	String empty = "";
-	String mailSubject = "Money Market Notification";
+	String mailSubject = "Money Market Workflow Notification";
 
 	//eventName/controlName
 	String formLoad = "formLoad";

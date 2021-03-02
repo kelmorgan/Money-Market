@@ -7,9 +7,9 @@ import java.util.Properties;
 
 public class LoadProp implements  Constants {
     private static final Logger logger = LogGen.getLoggerInstance(LoadProp.class);
-    public String processDefId;
-    public String mailFrom;
-    {
+    public static String processDefId;
+    public static String mailFrom;
+    static {
         try {
             logger.info("Start loading properties file");
             Properties properties = new Properties();

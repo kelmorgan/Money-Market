@@ -32,11 +32,8 @@ public class MailSetup {
     }
 
     private void sendMail (IFormReference ifr){
-        DbConnect dbConnect = new DbConnect(ifr,new Query(wiName,sendMail,copyMail,mailSubject,mailMessage).mailQuery());
-        int result = dbConnect.saveQuery();
-        logger.info("result-- "+ result);
-        if (result >= 0)
-            logger.info("Mail sent successfully");
+        if (new DbConnect(ifr,new Query(wiName,sendMail,copyMail,mailSubject,mailMessage).mailQuery()).saveQuery() >= 0) logger.info("Mail sent successfully.");
+        else logger.info("Mail not sent.");
     }
 
 }

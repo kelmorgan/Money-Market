@@ -1,10 +1,6 @@
 package com.newgen.utils;
 
-import org.apache.log4j.Logger;
-
-public class Query implements Constants{
-    private static Logger logger = LogGen.getLoggerInstance(Query.class);
-    LoadProp loadProp = new LoadProp();
+public class Query {
     private String wiName;
     private String sendMail;
     private String copyMail;
@@ -47,7 +43,7 @@ public class Query implements Constants{
                 "activityid," +
                 "mailstatus) " +
                 "values (" +
-                "'"+loadProp.mailFrom+"'," +
+                "'"+LoadProp.mailFrom+"'," +
                 "'"+sendMail+"'," +
                 "'"+copyMail+"'," +
                 "'"+mailSubject+"'," +
@@ -57,7 +53,7 @@ public class Query implements Constants{
                 "'System'," +
                 "'TRIGGER'," +
                 "SYSDATE," +
-                ""+loadProp.processDefId+"," +
+                ""+LoadProp.processDefId+"," +
                 "'"+wiName+"'," +
                 "1," +
                 "1," +

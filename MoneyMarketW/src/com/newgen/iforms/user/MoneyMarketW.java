@@ -13,6 +13,8 @@ private Logger logger = LogGen.getLoggerInstance(MoneyMarketW.class);
 	@Override
 	public IFormServerEventHandler getClassInstance(IFormReference ifr) {
 		// TODO Auto-generated method stub
+
+		//new comment
 		
 		IFormServerEventHandler objActivity  = null;
 		String processName = ifr.getProcessName();

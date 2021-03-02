@@ -6,6 +6,7 @@ import com.newgen.iforms.custom.IFormReference;
 import com.newgen.iforms.custom.IFormServerEventHandler;
 import com.newgen.reusableObject.Commons;
 import com.newgen.utils.LogGen;
+import com.newgen.utils.MailSetup;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 
@@ -39,8 +40,11 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
         try {
             switch (eventName){
                 case formLoad:{}
+                break;
                 case onLoad:{}
+                break;
                 case onClick:{}
+                break;
                 case onChange:{
                     switch (controlName){
                         case onChangeProcess: {
@@ -49,14 +53,20 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
                         }
                     }
                 }
+                break;
                 case custom:{}
+                break;
                 case onDone:{}
+                break;
                 case decisionHistory:{
                    if (getProcess(ifr).equalsIgnoreCase(commercialProcess))
                        setCpDecisionHistory(ifr);
-
                 }
-                case sendMail:{}
+                break;
+                case sendMail:{
+                    if (getProcess(ifr).equalsIgnoreCase(commercialProcess))
+                        cpMail(ifr);
+                }
             }
         }
         catch(Exception e){
@@ -66,10 +76,14 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
         return null;
     }
 
-    private void sMail(){}
+    private void cpMail(IFormReference ifr){
+        String message = "A window open request for Commercial Paper has been Initiated with ref number "+getWorkItemNumber(ifr)+".";
+        new MailSetup(ifr,getWorkItemNumber(ifr),getUsersMailsInGroup(ifr,groupName),empty,mailSubject,message);
+    }
     private void cpFormLoadActivity(IFormReference ifr){
         hideProcessMarkets(ifr);
         hideCpSections(ifr);
+        hideLandingMessageLabel(ifr);
         String sol = getSol(ifr);
         ifr.setValue(solLocal, sol);
         ifr.setValue(loginUserLocal,ifr.getUserName());
@@ -77,8 +91,12 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
         ifr.setValue(prevWsLocal, na);
         ifr.addItemInCombo(cpDecisionLocal,decSubmit,decSubmit);
         ifr.addItemInCombo(cpDecisionLocal,decDiscard,decDiscard);
+        ifr.setStyle(cpLandingMsgSection,visible,True);
+        ifr.setStyle(cpDecisionSection,visible,True);
+        ifr.setStyle(cpMarketSection,visible,True);
+        ifr.setStyle(cpSelectMarket,mandatory,True);
+        ifr.setStyle(cpLandMsgLocal,mandatory,True);
     }
-
 
     @Override
     public JSONArray validateSubmittedForm(FormDef formDef, IFormReference iFormReference, String s) {

@@ -9,11 +9,9 @@ public class DbConnect {
     private static Logger logger = LogGen.getLoggerInstance(DbConnect.class);
     private IFormReference ifr;
     private String query;
-    public DbConnect (){}
-
     public DbConnect(IFormReference ifr, String query){
-        setIfr(ifr);
-        setQuery(query);
+        this.ifr = ifr;
+        this.query = query;
     }
     public List<List<String>> getData (){
         try {
@@ -39,13 +37,5 @@ public class DbConnect {
     }
     private int saveData (){
         return ifr.saveDataInDB(query);
-    }
-
-    private void setQuery(String query) {
-        this.query = query;
-    }
-
-    private void setIfr(IFormReference ifr) {
-        this.ifr = ifr;
     }
 }

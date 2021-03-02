@@ -16,6 +16,22 @@ import java.text.SimpleDateFormat;
 
 public class Commons implements Constants {
     private Logger logger = LogGen.getLoggerInstance(Commons.class);
+
+    public String getUsersMailsInGroup(IFormReference ifr, String groupName){
+        String groupMail= "";
+        try {
+            DbConnect dbConnect = new DbConnect(ifr, new Query().getUsersInGroup(groupName));
+            int count = dbConnect.getData().size();
+            for (int i = 0; i < count; i++){
+                String mail = dbConnect.getData().get(i).get(0)+endMail;
+                groupMail = mail+","+groupMail;
+            }
+        } catch (Exception e){
+            logger.error("Exception occurred in getting users mails in group-- "+ e.getMessage());
+            return null;
+        }
+        return groupMail.trim();
+    }
     private String getTat (String entryDate, String exitDate){
             SimpleDateFormat sdf = new SimpleDateFormat(dateTimeFormat);
             try {
@@ -39,10 +55,12 @@ public class Commons implements Constants {
             return null;
     }
     public void setCpDecisionHistory (IFormReference ifr){
-        String marketType = (String)ifr.getValue(selectCpMarket);
+        String marketType = (String)ifr.getValue(cpSelectMarket);
         String remarks = (String)ifr.getValue(cpRemarksLocal);
         String entryDate = (String)ifr.getValue(entryDateLocal);
-        String exitDate = getCurrentDateTime(dateTimeFormat);
+        logger.info("entryDate-- "+ entryDate);
+        String exitDate = getCurrentDateTime();
+        logger.info("exitDate-- "+exitDate);
 
         setDecisionHistory(ifr,getLoginUser(ifr),cpProcessName,marketType,getCpDecision(ifr),remarks,getActivityName(ifr),entryDate,exitDate,getTat(entryDate,exitDate));
         ifr.setValue(decHisFlagLocal,flag);
@@ -70,6 +88,9 @@ public class Commons implements Constants {
     }
     public String getCurrentDateTime (String format){
         return new SimpleDateFormat(format).format(new Date());
+    }
+    public String getCurrentDateTime (){
+        return new SimpleDateFormat(dateTimeFormat).format(new Date());
     }
     public String getCpDecision (IFormReference ifr){
         return (String) ifr.getValue(cpDecisionLocal);
@@ -153,11 +174,19 @@ public class Commons implements Constants {
         return dbConnect.getData().get(0).get(0);
     }
     public void hideCpSections (IFormReference ifr){
-       ifr.setStyle(cpLandingMsgSection,visible,False);
-       ifr.setStyle(cpMarketSection,visible,False);
-       ifr.setStyle(cpDecisionSection,visible,False);
-       ifr.setStyle(cpPoiSection,visible,False);
-       ifr.setStyle(cpPrimaryBidSection,visible,False);
-       ifr.setStyle(cpTerminationSection,visible,False);
+      ifr.setStyle(cpBranchPriSection,visible,False);
+      ifr.setStyle(cpBranchSecSection,visible,False);
+      ifr.setStyle(cpLandingMsgSection,visible,False);
+      ifr.setStyle(cpMarketSection,visible,False);
+      ifr.setStyle(cpPrimaryBidSection,visible,False);
+      ifr.setStyle(cpProofOfInvestSection,visible,False);
+      ifr.setStyle(cpTerminationSection,visible,False);
+      ifr.setStyle(cpDecisionSection,visible,False);
+      ifr.setStyle(cpTreasuryPriSection,visible,False);
+      ifr.setStyle(cpTreasurySecSection,visible,False);
+      ifr.setStyle(cpTreasuryOpsPriSection,visible,False);
+      ifr.setStyle(cpTreasuryOpsSecSection,visible,False);
+      ifr.setStyle(cpPostSection,visible,False);
     }
+    public void hideLandingMessageLabel(IFormReference ifr){ifr.setStyle(landMsgLabelLocal,visible,False);}
 }

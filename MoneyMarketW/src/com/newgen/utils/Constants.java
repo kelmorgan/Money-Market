@@ -22,6 +22,21 @@ public interface Constants {
 	String exit = "Exit";
 	String query = "Query";
 	// Please input workSteps between comment bracket
+	// cp sections
+	String cpBranchPriSection = "cp_branchPm_section";
+	String cpBranchSecSection = "cp_BranchSec_section";
+	String cpLandingMsgSection = "cp_landingMsg_section";
+	String cpMarketSection = "cp_market_section";
+	String cpPrimaryBidSection = "cp_primaryBid_section";
+	String cpTerminationSection = "cp_termination_section";
+	String cpProofOfInvestSection = "cp_poi_section";
+	String cpDecisionSection = "cp_dec_section";
+	String cpTreasuryPriSection = "cp_pmTreasury_section";
+	String cpTreasurySecSection = "cp_secTreasury_section";
+	String cpTreasuryOpsSecSection = "cp_treasuryOpsSec_section";
+	String cpTreasuryOpsPriSection = "cp_treasuryOpsPm_section";
+	String cpPostSection = "cp_post_section";
+	// end of cp sections
 
 	//process Ids
 	String processTabName = "tab2";
@@ -38,14 +53,6 @@ public interface Constants {
 	String loginUserLocal ="g_loginUser";
 	String currWsLocal = "g_currWs";
 	String prevWsLocal = "g_prevWs";
-	String cpBranchPriSection = "cp_branchPm_section";
-	String cpLandingMsgSection = "cp_landingMsg_section";
-	String cpMarketSection = "cp_market_section";
-	String cpPrimaryBidSection = "cp_primaryBid_section";
-	String cpTerminationSection = "cp_term_section";
-	String cpPoiSection = "cp_poi_section";
-	String cpDecisionSection = "cp_dec_section";
-	String cpTreasuryPriSetupSection = "cp_pmTreasury_section";
 	String cpDecisionLocal = "cp_decision";
 	String wiNameLocal ="WorkItemName";
 	String decisionHisTable = "g_decisionHistory";
@@ -58,10 +65,12 @@ public interface Constants {
 	String dhRowExitDate = "Exit Date";
 	String dhRowTat = "TAT";
 	String dhRowMarketType = "Market Type";
-	String selectCpMarket = "cp_select_market";
+	String cpSelectMarket = "cp_select_market";
 	String cpRemarksLocal = "cp_remarks";
 	String entryDateLocal = "EntryDateTime";
 	String decHisFlagLocal = "g_decisionHistoryFlag";
+	String cpLandMsgLocal = "cp_landingMsg";
+	String landMsgLabelLocal = "g_landMsg";
 
 	//common variables
 	String visible = "visible";
@@ -75,8 +84,12 @@ public interface Constants {
 	String decApprove = "Approve";
 	String decReject = "Reject";
 	String cpProcessName = "Commercial Paper";
-	String dateTimeFormat = "dd/MM/yyyy HH:mm:ss";
+	String dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
 	String flag = "Y";
+	String endMail = "@firstbanknigeria.com";
+	String groupName = "T_USERS";
+	String empty = "";
+	String mailSubject = "Money Market Notification";
 
 	//eventName/controlName
 	String formLoad = "formLoad";
@@ -94,4 +107,5 @@ public interface Constants {
 	String configPath = "/was/IBM/WebSphere/AppServer/profiles/AppSrv01/installedApps/HO-IBPSUTIL01Cell01/MoneyMarketW.ear/MoneyMarketW.war/config/moneymarket.properties";
 	String mailFromField ="MAILFROM";
 	String processDefIdField = "PROCESSDEFID";
+
 }

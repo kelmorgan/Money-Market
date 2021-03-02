@@ -26,6 +26,9 @@ public class Query implements Constants{
     public String getSolQuery(){
         return "select sole_id from usr_0_fbn_usr_branch_mapping where upper(user_id) = upper('"+userName+"')";
     }
+    public String getUsersInGroup (String groupName){
+        return "select username from pdbuser where userindex in (select userindex from pdbgroupmember where groupindex = (select groupindex from PDBGroup where GroupName='"+groupName+"'))";
+    }
     public String mailQuery (){
         return "insert into wfmailqueuetable (" +
                 "mailfrom," +

@@ -43,8 +43,7 @@ public class TreasuryOfficerVerifier extends Commons implements IFormServerEvent
                 break;
                 case onClick:{}
                 break;
-                case onChange:{
-                }
+                case onChange:{}
                 break;
                 case custom:{}
                 break;

@@ -35,7 +35,7 @@ public class Commons implements Constants {
         }
         catch (ParseException e) {
             e.printStackTrace();
-            logger.error("Exception occurred in getting TAT-- "+ e.getMessage());
+            logger.error("Exception occurred in getTat method-- "+ e.getMessage());
         }
         return null;
     }
@@ -66,7 +66,7 @@ public class Commons implements Constants {
                 groupMail = mail+","+groupMail;
             }
         } catch (Exception e){
-            logger.error("Exception occurred in getting users mails in group-- "+ e.getMessage());
+            logger.error("Exception occurred in getUsersMailInGroup-- "+ e.getMessage());
             return null;
         }
         logger.info("getUsersMailsGroup method --mail of users-- "+groupMail.trim());

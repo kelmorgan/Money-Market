@@ -42,7 +42,7 @@ public class Commons implements Constants {
         String marketType = (String)ifr.getValue(selectCpMarket);
         String remarks = (String)ifr.getValue(cpRemarksLocal);
         String entryDate = (String)ifr.getValue(entryDateLocal);
-        String exitDate = getCurrentDateTime();
+        String exitDate = getCurrentDateTime(dateTimeFormat);
 
         setDecisionHistory(ifr,getLoginUser(ifr),cpProcessName,marketType,getCpDecision(ifr),remarks,getActivityName(ifr),entryDate,exitDate,getTat(entryDate,exitDate));
         ifr.setValue(decHisFlagLocal,flag);
@@ -68,8 +68,8 @@ public class Commons implements Constants {
     public String getProcess(IFormReference ifr){
         return (String)ifr.getValue(selectProcess);
     }
-    public String getCurrentDateTime (){
-        return new SimpleDateFormat(dateTimeFormat).format(new Date());
+    public String getCurrentDateTime (String format){
+        return new SimpleDateFormat(format).format(new Date());
     }
     public String getCpDecision (IFormReference ifr){
         return (String) ifr.getValue(cpDecisionLocal);

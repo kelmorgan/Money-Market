@@ -72,11 +72,11 @@ public class Commons implements Constants {
         return groupMail.trim();
     }
     public void setCpDecisionHistory (IFormReference ifr){
-        String marketType = getCpMarket(ifr);
+        String marketType = getCpMarketName(ifr);
         String remarks = (String)ifr.getValue(cpRemarksLocal);
         String entryDate = (String)ifr.getValue(entryDateLocal);
         String exitDate = getCurrentDateTime();
-        setDecisionHistory(ifr,getLoginUser(ifr),cpProcessName,marketType,getCpDecision(ifr),remarks,getActivityName(ifr),entryDate,exitDate,getTat(entryDate,exitDate));
+        setDecisionHistory(ifr,getLoginUser(ifr),commercialProcessName,marketType,getCpDecision(ifr),remarks,getActivityName(ifr),entryDate,exitDate,getTat(entryDate,exitDate));
         ifr.setValue(decHisFlagLocal,flag);
     }
     public String getCpMarket(IFormReference ifr){return  (String) ifr.getValue(cpSelectMarketLocal);}
@@ -201,4 +201,19 @@ public class Commons implements Constants {
     public String getCpCategory(IFormReference ifr){return (String) ifr.getValue(cpCategoryLocal);}
     public void cpSetDecisionValue (IFormReference ifr, String value){ifr.setValue(cpDecisionLocal,value);}
     public String getCpUpdateMsg (IFormReference ifr){return (String) ifr.getValue(cpUpdateLocal);}
+    public String getCpMarketName (IFormReference ifr){
+        if (getCpMarket(ifr).equalsIgnoreCase(cpPrimaryMarket)) return primary;
+        else if (getProcess(ifr).equalsIgnoreCase(cpSecondaryMarket)) return secondary;
+        return null;
+    }
+    public boolean compareDate(String startDate, String endDate){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dbDateTimeFormat);
+        try {
+             Date start = simpleDateFormat.parse(startDate);
+             Date end = simpleDateFormat.parse(endDate);
+             if (start.compareTo(end) < 0)
+                 return true;
+        } catch (Exception e){logger.error("Exception occurred in compareDate method-- "+ e.getMessage());return false;}
+        return false;
+    }
 }

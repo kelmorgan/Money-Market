@@ -92,8 +92,11 @@ public interface Constants {
 
 	//common variables
 	String omoProcess = "omo_market";
+	String omoProcessName = "OMO Auctions";
 	String treasuryProcess = "tb_market";
+	String treasuryProcessName = "Treasury Bills";
 	String commercialProcess = "cp_market";
+	String commercialProcessName = "Commercial Paper";
 	String visible = "visible";
 	String disable = "disable";
 	String mandatory = "mandatory";
@@ -104,13 +107,14 @@ public interface Constants {
 	String decSubmit = "Submit";
 	String decApprove = "Approve";
 	String decReject = "Reject";
-	String cpProcessName = "Commercial Paper";
 	String dbDateTimeFormat = "yyyy-MM-dd HH:mm:ss";
 	String flag = "Y";
 	String endMail = "@firstbanknigeria.com";
 	String groupName = "T_USERS";
 	String empty = "";
 	String mailSubject = "Money Market Workflow Notification";
+	String primary = "Primary";
+	String secondary = "Secondary";
 
 
 	//eventName/controlName

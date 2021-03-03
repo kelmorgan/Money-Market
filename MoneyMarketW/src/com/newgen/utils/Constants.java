@@ -2,7 +2,6 @@ package com.newgen.utils;
 
 public interface Constants {
 	String ProcessName = "MoneyMarketW";
-
 	//WorkSteps
 	String treasuryOfficerInitiator = "Treasury_Officer_Initiator";
 	String treasuryOfficerVerifier = "Treasury_Officer_Verifier";
@@ -22,6 +21,7 @@ public interface Constants {
 	String exit = "Exit";
 	String query = "Query";
 	// Please input workSteps between comment bracket
+
 	// cp sections
 	String cpBranchPriSection = "cp_branchPm_section";
 	String cpBranchSecSection = "cp_BranchSec_section";
@@ -36,24 +36,21 @@ public interface Constants {
 	String cpTreasuryOpsSecSection = "cp_treasuryOpsSec_section";
 	String cpTreasuryOpsPriSection = "cp_treasuryOpsPm_section";
 	String cpPostSection = "cp_post_section";
+	String cpSetupSection="cp_setup_section";
 	// end of cp sections
 
-	//process Ids
+	//general process Ids
+	String selectProcessLocal = "g_select_market";
 	String processTabName = "tab2";
 	String dashboardTab = "0";
 	String commercialTab = "1";
 	String treasuryTab = "2";
 	String omoTab = "3";
-	String selectProcess = "g_select_market";
-	String commercialProcess = "cp_market";
-	String treasuryProcess = "tb_market";
-	String omoProcess = "omo_market";
 	String moneyMarketSection = "g_moneyMarket_section";
 	String solLocal = "g_sol";
 	String loginUserLocal ="g_loginUser";
 	String currWsLocal = "g_currWs";
 	String prevWsLocal = "g_prevWs";
-	String cpDecisionLocal = "cp_decision";
 	String wiNameLocal ="WorkItemName";
 	String decisionHisTable = "g_decisionHistory";
 	String dhRowStaffId = "Staff ID";
@@ -65,14 +62,38 @@ public interface Constants {
 	String dhRowExitDate = "Exit Date";
 	String dhRowTat = "TAT";
 	String dhRowMarketType = "Market Type";
-	String cpSelectMarket = "cp_select_market";
-	String cpRemarksLocal = "cp_remarks";
 	String entryDateLocal = "EntryDateTime";
 	String decHisFlagLocal = "g_decisionHistoryFlag";
-	String cpLandMsgLocal = "cp_landingMsg";
 	String landMsgLabelLocal = "g_landMsg";
+	String goBackDashboardSection = "g_goBackDashboard_section";
+	String windowSetupFlagLocal = "g_setupFlag";
+
+	// commercial Paper process ids
+	String cpSelectMarketLocal = "cp_select_market";
+	String cpRemarksLocal = "cp_remarks";
+	String cpDecisionLocal = "cp_decision";
+	String cpLandMsgLocal = "cp_landingMsg";
+	String cpPrimaryMarket = "cp_primary";
+	String cpSecondaryMarket = "cp_secondary";
+	String cpCategoryLocal = "cp_category";
+	String cpCategorySetup = "Setup";
+	String cpCategoryBid = "Bid";
+	String cpCategoryReDiscountRate = "Re-discount Rate";
+	String cpCategoryCutOff = "Cut off time modification";
+	String cpCategoryReport = "Report";
+	String cpSetupWindowBtn = "cp_setupWin_btn";
+	String cpUpdateCutoffTimeBtn = "cp_updateCutoff_btn";
+	String cpSetReDiscountRateBtn = "cp_rediscRate_btn";
+	String cpLandingMsgSubmitBtn="cp_landMsgSubmit_btn";
+	String cpUpdateLocal = "cp_updateMsg";
+	String cpPmOpenDateLocal = "cp_open_window_date";
+	String cpPmCloseDateLocal = "cp_close_window_date";
+	String cpPmMinPrinAmtLocal = "cp_mp_amount";
 
 	//common variables
+	String omoProcess = "omo_market";
+	String treasuryProcess = "tb_market";
+	String commercialProcess = "cp_market";
 	String visible = "visible";
 	String disable = "disable";
 	String mandatory = "mandatory";
@@ -91,6 +112,7 @@ public interface Constants {
 	String empty = "";
 	String mailSubject = "Money Market Workflow Notification";
 
+
 	//eventName/controlName
 	String formLoad = "formLoad";
 	String onClick = "onClick";
@@ -101,6 +123,9 @@ public interface Constants {
 	String sendMail = "sendMail";
 	String onChangeProcess = "onChangeProcess";
 	String decisionHistory = "decisionHistory";
+	String goToDashBoard = "onClickGoBackToDashboard";
+	String cpUpdateMsg = "onClickUpdateMsg";
+	String cpOnSelectCategory = "onChangeCategory";
 
 	//config
 	String logPath = "nglogs/NGF_Logs/MoneyMarket/";

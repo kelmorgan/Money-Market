@@ -5,6 +5,7 @@ import com.newgen.iforms.FormDef;
 import com.newgen.iforms.custom.IFormReference;
 import com.newgen.iforms.custom.IFormServerEventHandler;
 import com.newgen.reusableObject.Commons;
+import com.newgen.reusableObject.CommonsI;
 import com.newgen.utils.LogGen;
 import com.newgen.utils.MailSetup;
 import org.apache.log4j.Logger;
@@ -13,14 +14,13 @@ import org.json.simple.JSONArray;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class TreasuryOfficerVerifier extends Commons implements IFormServerEventHandler {
+public class TreasuryOfficerVerifier extends Commons implements IFormServerEventHandler, CommonsI {
     private static Logger logger = LogGen.getLoggerInstance(TreasuryOfficerVerifier.class);
     @Override
     public void beforeFormLoad(FormDef formDef, IFormReference ifr) {
-        if (!getProcess(ifr).equalsIgnoreCase(empty))
-            showSelectedProcessSheet(ifr);
-        if (getProcess(ifr).equalsIgnoreCase(commercialProcess))
-            cpFormLoadActivity(ifr);
+        clearDecHisFlag(ifr);
+        if (!isEmpty(getProcess(ifr))) showSelectedProcessSheet(ifr);
+        if (getProcess(ifr).equalsIgnoreCase(commercialProcess)) cpFormLoadActivity(ifr);
     }
 
     @Override
@@ -49,13 +49,9 @@ public class TreasuryOfficerVerifier extends Commons implements IFormServerEvent
                 break;
                 case onDone:{}
                 break;
-                case decisionHistory:{
-                    if (getProcess(ifr).equalsIgnoreCase(commercialProcess)) setCpDecisionHistory(ifr);
-                }
+                case decisionHistory:{if (getProcess(ifr).equalsIgnoreCase(commercialProcess)) setCpDecisionHistory(ifr); }
                 break;
-                case sendMail:{
-                    if (getProcess(ifr).equalsIgnoreCase(commercialProcess)) sendCpMail(ifr);
-                }
+                case sendMail:{ if (getProcess(ifr).equalsIgnoreCase(commercialProcess)) cpSendMail(ifr);}
             }
         }
         catch(Exception e){
@@ -65,34 +61,43 @@ public class TreasuryOfficerVerifier extends Commons implements IFormServerEvent
         return null;
     }
 
-    private void sendCpMail(IFormReference ifr) {
+    @Override
+    public void cpSendMail(IFormReference ifr) {
         String message;
         if (getPrevWs(ifr).equalsIgnoreCase(treasuryOfficerInitiator)){
             if (getCpDecision(ifr).equalsIgnoreCase(decApprove)) {
-                message = "Landing Message has been approved by the treasury officer verifier with ref "+getWorkItemNumber(ifr)+". Login to setup market.";
+                message = "Landing Message has been approved by the treasury officer verifier with ref No. "+getWorkItemNumber(ifr)+". Login to setup market.";
                 new MailSetup(ifr, getWorkItemNumber(ifr), getUsersMailsInGroup(ifr, groupName), empty, mailSubject, message);
             }
             else {
-                message = "Landing Message has been rejected by the treasury officer verifier with ref "+getWorkItemNumber(ifr)+". Login to make necessary corrections.";
+                message = "Landing Message has been rejected by the treasury officer verifier with ref No. "+getWorkItemNumber(ifr)+". Login to make necessary corrections.";
                 new MailSetup(ifr, getWorkItemNumber(ifr), getUsersMailsInGroup(ifr, groupName), empty, mailSubject, message);
             }
     }
     }
-    private void cpFormLoadActivity(IFormReference ifr){
+    @Override
+    public void cpFormLoadActivity(IFormReference ifr){
         hideCpSections(ifr);
         hideShowLandingMessageLabel(ifr,False);
         setGenDetails(ifr);
         disableCpSections(ifr);
+        hideShowBackToDashboard(ifr,False);
+        if (getPrevWs(ifr).equalsIgnoreCase(treasuryOfficerInitiator)) {
+            setVisible(ifr,new String[] {cpLandingMsgSection,cpDecisionSection,cpMarketSection});
+            enableFields(ifr,new String[]{cpDecisionSection});
+            setMandatory(ifr, new String[]{cpDecisionLocal,cpRemarksLocal});
+        }
+        cpSetDecision(ifr);
+    }
+
+    @Override
+    public void cpSetDecision(IFormReference ifr) {
+        ifr.clearCombo(cpDecisionLocal);
+        clearFields(ifr,new String[]{cpDecisionLocal,cpRemarksLocal});
         ifr.addItemInCombo(cpDecisionLocal, decApprove, decApprove);
         ifr.addItemInCombo(cpDecisionLocal, decReject, decReject);
-        if (getPrevWs(ifr).equalsIgnoreCase(treasuryOfficerInitiator)) {
-            ifr.setStyle(cpLandingMsgSection, visible, True);
-            ifr.setStyle(cpDecisionSection, visible, True);
-            ifr.setStyle(cpDecisionSection, disable, False);
-            ifr.setStyle(cpMarketSection, visible, True);
-            ifr.setStyle(cpDecisionLocal, mandatory, True);
-        }
     }
+
     @Override
     public JSONArray validateSubmittedForm(FormDef formDef, IFormReference iFormReference, String s) {
         return null;

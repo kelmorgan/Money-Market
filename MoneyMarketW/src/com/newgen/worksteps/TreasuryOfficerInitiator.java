@@ -5,6 +5,7 @@ import com.newgen.iforms.FormDef;
 import com.newgen.iforms.custom.IFormReference;
 import com.newgen.iforms.custom.IFormServerEventHandler;
 import com.newgen.reusableObject.Commons;
+import com.newgen.reusableObject.CommonsI;
 import com.newgen.utils.LogGen;
 import com.newgen.utils.MailSetup;
 import org.apache.log4j.Logger;
@@ -13,16 +14,12 @@ import org.json.simple.JSONArray;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class TreasuryOfficerInitiator extends Commons implements IFormServerEventHandler {
+public class TreasuryOfficerInitiator extends Commons implements IFormServerEventHandler, CommonsI {
     private Logger logger = LogGen.getLoggerInstance(TreasuryOfficerInitiator.class);
     @Override
     public void beforeFormLoad(FormDef formDef, IFormReference ifr) {
-        try {
-            cpFormLoadActivity(ifr);
-        }
-        catch (Exception e){
-            logger.error("Exception-- "+ e.getMessage());
-        }
+        try { cpFormLoadActivity(ifr);}
+        catch (Exception e){ logger.error("Exception-- "+ e.getMessage());}
     }
 
     @Override
@@ -43,12 +40,23 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
                 break;
                 case onLoad:{}
                 break;
-                case onClick:{}
+                case onClick:{
+                    switch (controlName){
+                        case goToDashBoard:{
+                            backToDashboard(ifr);
+                            clearFields(ifr,new String[] {selectProcessLocal});
+                            if (getProcess(ifr).equalsIgnoreCase(commercialProcess))
+                                cpBackToDashboard(ifr);
+                            break;
+                        }
+                    }
+                }
                 break;
                 case onChange:{
                     switch (controlName){
                         case onChangeProcess: {
                             selectProcessSheet(ifr);
+                            if (getProcess(ifr).equalsIgnoreCase(commercialProcess)) cpInitiatorFormLoad(ifr);
                             break;
                         }
                     }
@@ -65,7 +73,7 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
                 break;
                 case sendMail:{
                     if (getProcess(ifr).equalsIgnoreCase(commercialProcess))
-                        sendCpMail(ifr);
+                        cpSendMail(ifr);
                 }
             }
         }
@@ -76,25 +84,40 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
         return null;
     }
 
-    private void sendCpMail(IFormReference ifr){
+    private void cpInitiatorFormLoad (IFormReference ifr){
+        setMandatory(ifr,new String [] {cpSelectMarketLocal,cpLandMsgLocal,cpDecisionLocal});
+    }
+
+    @Override
+    public void cpSendMail(IFormReference ifr){
         String message = "A window open request for Commercial Paper has been Initiated with ref number "+getWorkItemNumber(ifr)+".";
         new MailSetup(ifr,getWorkItemNumber(ifr),getUsersMailsInGroup(ifr,groupName),empty,mailSubject,message);
     }
-    private void cpFormLoadActivity(IFormReference ifr){
+    @Override
+    public void cpFormLoadActivity(IFormReference ifr){
         hideProcess(ifr);
         hideCpSections(ifr);
         hideShowLandingMessageLabel(ifr,False);
+        hideShowBackToDashboard(ifr,False);
         setGenDetails(ifr);
-        ifr.setValue(currWsLocal, ifr.getActivityName());
+        cpSetDecision(ifr);
+        clearFields(ifr,new String [] {selectProcessLocal});
+        setMandatory(ifr, new String[]{selectProcessLocal});
+        ifr.setValue(currWsLocal, getActivityName(ifr));
         ifr.setValue(prevWsLocal, na);
+        setVisible(ifr, new String[]{cpLandingMsgSection, cpDecisionSection, cpMarketSection});
+    }
+
+    @Override
+    public void cpSetDecision(IFormReference ifr) {
         ifr.addItemInCombo(cpDecisionLocal,decSubmit,decSubmit);
         ifr.addItemInCombo(cpDecisionLocal,decDiscard,decDiscard);
-        ifr.setStyle(cpLandingMsgSection,visible,True);
-        ifr.setStyle(cpDecisionSection,visible,True);
-        ifr.setStyle(cpMarketSection,visible,True);
-        ifr.setStyle(cpSelectMarket,mandatory,True);
-        ifr.setStyle(cpLandMsgLocal,mandatory,True);
-        ifr.setStyle(cpDecisionLocal,mandatory,True);
+    }
+
+
+    private void cpBackToDashboard(IFormReference ifr) {
+        undoMandatory(ifr,new String [] {cpSelectMarketLocal,cpLandMsgLocal,cpDecisionLocal});
+        clearFields(ifr,new String [] {cpSelectMarketLocal,cpLandMsgLocal,cpDecisionLocal});
     }
 
     @Override

@@ -26,16 +26,12 @@ private Logger logger = LogGen.getLoggerInstance(MoneyMarketW.class);
 	@Override
 	public IFormServerEventHandler getClassInstance(IFormReference ifr) {
 		// TODO Auto-generated method stub
-
-		//new comment
-		
 		IFormServerEventHandler objActivity  = null;
 		String processName = ifr.getProcessName();
 		logger.info("processName: "+processName);
 		String activityName =ifr.getActivityName();
 		logger.info("activityName: "+activityName);
 		try {
-		
 		if (processName.equalsIgnoreCase(ProcessName)){
 			if (activityName != null && activityName.trim().equalsIgnoreCase(treasuryOfficerInitiator))
 				objActivity = new TreasuryOfficerInitiator();

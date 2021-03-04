@@ -37,6 +37,7 @@ public interface Constants {
 	String cpTreasuryOpsPriSection = "cp_treasuryOpsPm_section";
 	String cpPostSection = "cp_post_section";
 	String cpSetupSection="cp_setup_section";
+	String cpCutOffTimeSection = "cp_cutoff_section";
 	// end of cp sections
 
 	//general process Ids

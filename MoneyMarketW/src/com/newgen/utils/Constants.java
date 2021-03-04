@@ -89,7 +89,7 @@ public interface Constants {
 	String cpUpdateLocal = "cp_updateMsg";
 	String cpOpenDateLocal = "cp_open_window_date";
 	String cpCloseDateLocal = "cp_close_window_date";
-	String cpPmMinPrinAmtLocal = "cp_mp_amount";
+	String cpPmMinPriAmtLocal = "cp_mp_amount";
 
 	//common variables
 	String omoProcess = "omo_market";

@@ -59,13 +59,10 @@ public class Commons implements Constants {
         String groupMail= "";
         try {
             DbConnect dbConnect = new DbConnect(ifr, new Query().getUsersInGroup(groupName));
-            int count = dbConnect.getData().size();
-            for (int i = 0; i < count; i++){
-                String mail = dbConnect.getData().get(i).get(0)+endMail;
-                groupMail = mail+","+groupMail;
-            }
+            for (int i = 0; i < dbConnect.getData().size(); i++){
+                groupMail = dbConnect.getData().get(i).get(0)+endMail+","+groupMail; }
         } catch (Exception e){
-            logger.error("Exception occurred in getUsersMailInGroup-- "+ e.getMessage());
+            logger.error("Exception occurred in getUsersMailInGroup Method-- "+ e.getMessage());
             return null;
         }
         logger.info("getUsersMailsGroup method --mail of users-- "+groupMail.trim());
@@ -218,8 +215,14 @@ public class Commons implements Constants {
     }
     public String getCpOpenDate(IFormReference ifr){return (String)ifr.getValue(cpOpenDateLocal);}
     public String getCpCloseDate(IFormReference ifr){return (String)ifr.getValue(cpCloseDateLocal);}
-    public String getCpWinUniqueRefNo(IFormReference ifr){
-        if (getCpMarket(ifr).equalsIgnoreCase(cpPrimaryMarket)) { return ""; }
-        else return "";
+    public String getCpPmWinRefNo(IFormReference ifr){
+        return null;
+    }
+    public String getCpSmWinRefNo(IFormReference ifr){
+        return null;
+    }
+    public String getCpPmCusRefNo(IFormReference ifr){return null;}
+    public String getCpSmCusRefNo(IFormReference ifr){
+        return null;
     }
 }

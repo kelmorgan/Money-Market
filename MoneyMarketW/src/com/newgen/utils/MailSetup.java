@@ -30,10 +30,14 @@ public class MailSetup {
                 "</html>";
     }
 
-    private void sendMail (IFormReference ifr){
+    private void sendMail(IFormReference ifr){
         try {
-            if (new DbConnect(ifr, new Query().getMailQuery(wiName,sendMail,copyMail,mailSubject,mailMessage)).saveQuery() >= 0) logger.info("Mail sent successfully.");
+            if (isMailSent(ifr)) logger.info("Mail sent successfully.");
             else logger.info("Mail not sent.");
         } catch (Exception e){ logger.info("Exception occurred -- Mail was not sent-- "+ e.getMessage());}
+    }
+
+    private boolean isMailSent(IFormReference ifr){
+        return new DbConnect(ifr, new Query().getMailQuery(wiName,sendMail,copyMail,mailSubject,mailMessage)).saveQuery() >= 0;
     }
 }

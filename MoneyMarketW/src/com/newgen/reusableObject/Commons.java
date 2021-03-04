@@ -161,7 +161,7 @@ public class Commons implements Constants {
         }
     }
     public String getSol (IFormReference ifr){
-        try { return new DbConnect(ifr, new Query(getLoginUser(ifr)).getSolQuery()).getData().get(0).get(0); }
+        try { return new DbConnect(ifr, new Query().getSolQuery(getLoginUser(ifr))).getData().get(0).get(0); }
         catch (Exception e){ logger.error("Exception occurred in getSol Method-- "+e.getMessage());return  null;}
     }
     public void hideCpSections (IFormReference ifr){
@@ -215,5 +215,11 @@ public class Commons implements Constants {
                  return true;
         } catch (Exception e){logger.error("Exception occurred in compareDate method-- "+ e.getMessage());return false;}
         return false;
+    }
+    public String getCpOpenDate(IFormReference ifr){return (String)ifr.getValue(cpOpenDateLocal);}
+    public String getCpCloseDate(IFormReference ifr){return (String)ifr.getValue(cpCloseDateLocal);}
+    public String getCpWinUniqueRefNo(IFormReference ifr){
+        if (getCpMarket(ifr).equalsIgnoreCase(cpPrimaryMarket)) { return ""; }
+        else return "";
     }
 }

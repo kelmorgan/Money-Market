@@ -1,31 +1,13 @@
 package com.newgen.utils;
 
 public class Query {
-    private String wiName;
-    private String sendMail;
-    private String copyMail;
-    private String mailSubject;
-    private String mailMessage;
-    private String userName;
-
-    public Query (){}
-    public Query (String userName){
-        this.userName = userName;
-    }
-    public Query (String wiName, String sendMail, String copyMail, String mailSubject, String mailMessage){
-        this.wiName = wiName;
-        this.sendMail = sendMail;
-        this.copyMail = copyMail;
-        this.mailSubject = mailSubject;
-        this.mailMessage = mailMessage;
-    }
-    public String getSolQuery(){
+    public String getSolQuery(String userName){
         return "select sole_id from usr_0_fbn_usr_branch_mapping where upper(user_id) = upper('"+userName+"')";
     }
     public String getUsersInGroup (String groupName){
         return "select username from pdbuser where userindex in (select userindex from pdbgroupmember where groupindex = (select groupindex from PDBGroup where GroupName='"+groupName+"'))";
     }
-    public String mailQuery (){
+    public String getMailQuery(String wiName, String sendMail, String copyMail, String mailSubject, String mailMessage){
         return "insert into wfmailqueuetable (" +
                 "mailfrom," +
                 "mailto," +
@@ -58,5 +40,11 @@ public class Query {
                 "1," +
                 "1," +
                 "'N')";
+    }
+    public String getSetupQuery (){
+        return "insert into mm_setup_tbl () values ()";
+    }
+    public String getUpdateSetupQuery(String columnName,String value,String condition){
+        return "update mm_setup_tbl set "+columnName+" = "+value+" where condition = "+condition+"";
     }
 }

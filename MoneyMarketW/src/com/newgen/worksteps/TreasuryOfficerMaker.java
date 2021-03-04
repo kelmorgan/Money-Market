@@ -46,6 +46,7 @@ public class TreasuryOfficerMaker extends Commons implements IFormServerEventHan
                     switch (controlName){
                         case cpUpdateMsg:{cpUpdateLandingMsg(ifr);}
                         break;
+                        case cpSetupWindow:{ return setupCpWindow(ifr);}
                     }
                 }
                 break;
@@ -96,6 +97,19 @@ public class TreasuryOfficerMaker extends Commons implements IFormServerEventHan
         return null;
     }
 
+    private String setupCpWindow (IFormReference ifr){
+        if (isEmpty(getSetupFlag(ifr))){
+            if (getCpMarket(ifr).equalsIgnoreCase(cpPrimaryMarket)){
+                if (compareDate(getCpOpenDate(ifr),getCpCloseDate(ifr))){}
+                else {
+                    return "Close date cannot be before open date.";
+                }
+            }
+            else if (getCpMarket(ifr).equalsIgnoreCase(cpSecondaryMarket)){}
+        }
+
+        return null;
+    }
     private void cpUpdateLandingMsg(IFormReference ifr){
         if (getCpUpdateMsg(ifr).equalsIgnoreCase(True)){
             cpSetDecisionValue(ifr,decSubmit);
@@ -118,8 +132,8 @@ public class TreasuryOfficerMaker extends Commons implements IFormServerEventHan
         if (getCpMarket(ifr).equalsIgnoreCase(cpPrimaryMarket)){
             if (getCpCategory(ifr).equalsIgnoreCase(cpCategorySetup)){
                 setVisible(ifr, new String [] {cpTreasuryPriSection,cpSetupSection,cpSetupWindowBtn});
-                setMandatory(ifr,new String[] {cpPmOpenDateLocal,cpPmMinPrinAmtLocal,cpPmCloseDateLocal});
-                enableFields(ifr,new String[] {cpPmOpenDateLocal,cpPmMinPrinAmtLocal,cpPmCloseDateLocal,cpSetupWindowBtn});
+                setMandatory(ifr,new String[] {cpOpenDateLocal,cpPmMinPrinAmtLocal,cpCloseDateLocal});
+                enableFields(ifr,new String[] {cpOpenDateLocal,cpPmMinPrinAmtLocal,cpCloseDateLocal,cpSetupWindowBtn});
             }
         }
         else if (getCpMarket(ifr).equalsIgnoreCase(cpSecondaryMarket)){}
@@ -152,7 +166,10 @@ public class TreasuryOfficerMaker extends Commons implements IFormServerEventHan
                     }
                 } else if (getCpMarket(ifr).equalsIgnoreCase(cpSecondaryMarket)) {}
             }
-            else {}
+            else {
+                if (getCpMarket(ifr).equalsIgnoreCase(cpPrimaryMarket)){}
+                else if (getCpMarket(ifr).equalsIgnoreCase(cpSecondaryMarket)){}
+            }
         }
         cpSetDecision(ifr);
     }

@@ -86,8 +86,8 @@ public interface Constants {
 	String cpSetReDiscountRateBtn = "cp_rediscRate_btn";
 	String cpLandingMsgSubmitBtn="cp_landMsgSubmit_btn";
 	String cpUpdateLocal = "cp_updateMsg";
-	String cpPmOpenDateLocal = "cp_open_window_date";
-	String cpPmCloseDateLocal = "cp_close_window_date";
+	String cpOpenDateLocal = "cp_open_window_date";
+	String cpCloseDateLocal = "cp_close_window_date";
 	String cpPmMinPrinAmtLocal = "cp_mp_amount";
 
 	//common variables
@@ -130,6 +130,7 @@ public interface Constants {
 	String goToDashBoard = "onClickGoBackToDashboard";
 	String cpUpdateMsg = "onClickUpdateMsg";
 	String cpOnSelectCategory = "onChangeCategory";
+	String cpSetupWindow = "onClickSetup";
 
 	//config
 	String logPath = "nglogs/NGF_Logs/MoneyMarket/";

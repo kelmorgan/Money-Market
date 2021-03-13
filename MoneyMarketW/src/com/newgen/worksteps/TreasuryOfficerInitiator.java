@@ -18,7 +18,11 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
     private Logger logger = LogGen.getLoggerInstance(TreasuryOfficerInitiator.class);
     @Override
     public void beforeFormLoad(FormDef formDef, IFormReference ifr) {
-        try { cpFormLoadActivity(ifr);}
+        try { 
+        	
+        	//cpFormLoadActivity(ifr);
+        	beforeFormLoadActivity(ifr);
+        }
         catch (Exception e){ logger.error("Exception-- "+ e.getMessage());}
     }
 
@@ -47,6 +51,8 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
                             clearFields(ifr,new String[] {selectProcessLocal});
                             if (getProcess(ifr).equalsIgnoreCase(commercialProcess))
                                 cpBackToDashboard(ifr);
+                            if (getProcess(ifr).equalsIgnoreCase(treasuryProcess))
+                                tbBackToDashboard(ifr);
                             break;
                         }
                     }
@@ -57,6 +63,8 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
                         case onChangeProcess: {
                             selectProcessSheet(ifr);
                             if (getProcess(ifr).equalsIgnoreCase(commercialProcess)) cpInitiatorFormLoad(ifr);
+                            else if (getProcess(ifr).equalsIgnoreCase(treasuryProcess)) 
+                            	tbInitiatorFormLoad(ifr);
                             break;
                         }
                     }
@@ -69,11 +77,15 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
                 case decisionHistory:{
                    if (getProcess(ifr).equalsIgnoreCase(commercialProcess))
                        setCpDecisionHistory(ifr);
+                   else if (getProcess(ifr).equalsIgnoreCase(treasuryProcess)) 
+                	   setTbDecisionHistory(ifr);
                 }
                 break;
                 case sendMail:{
                     if (getProcess(ifr).equalsIgnoreCase(commercialProcess))
                         cpSendMail(ifr);
+                    else if (getProcess(ifr).equalsIgnoreCase(treasuryProcess)) 
+                    	tbSendMail(ifr);
                 }
             }
         }
@@ -106,6 +118,22 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
         ifr.setValue(currWsLocal, getActivityName(ifr));
         ifr.setValue(prevWsLocal, na);
         setVisible(ifr, new String[]{cpLandingMsgSection, cpDecisionSection, cpMarketSection});
+    }
+    public void beforeFormLoadActivity(IFormReference ifr){
+        hideProcess(ifr);
+        hideCpSections(ifr);
+        hideTbSections(ifr);
+        hideShowLandingMessageLabel(ifr,False);
+        hideShowBackToDashboard(ifr,False);
+        setGenDetails(ifr);
+        cpSetDecision(ifr);
+        tbSetDecision(ifr);
+        clearFields(ifr,new String [] {selectProcessLocal});
+        setMandatory(ifr, new String[]{selectProcessLocal});
+        ifr.setValue(currWsLocal, getActivityName(ifr));
+        ifr.setValue(prevWsLocal, na);
+        setVisible(ifr, new String[]{cpLandingMsgSection, cpDecisionSection, cpMarketSection});
+        setVisible(ifr, new String[]{tbLandingMsgSection, tbDecisionSection, tbMarketSection});
     }
 
     @Override
@@ -144,4 +172,37 @@ public class TreasuryOfficerInitiator extends Commons implements IFormServerEven
     public String introduceWorkItemInWorkFlow(IFormReference iFormReference, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         return null;
     }
+    
+    /******************  TREASURY BILL CODE BEGINS *********************************/
+    
+    private void tbBackToDashboard(IFormReference ifr) {
+        undoMandatory(ifr,new String [] {tbSelectMarketLocal,tbLandMsgLocal,tbDecisionLocal});
+        clearFields(ifr,new String [] {tbSelectMarketLocal,tbLandMsgLocal,tbDecisionLocal});
+    }
+    public void tbFormLoadActivity(IFormReference ifr){
+        hideProcess(ifr);
+        hideTbSections(ifr);
+        hideShowLandingMessageLabel(ifr,False);
+        hideShowBackToDashboard(ifr,False);
+        setGenDetails(ifr);
+        tbSetDecision(ifr);
+        clearField(ifr,selectProcessLocal);
+        setMandatory(ifr, selectProcessLocal);
+        ifr.setValue(currWsLocal, getActivityName(ifr));
+        ifr.setValue(prevWsLocal, na);
+        setVisible(ifr, new String[]{tbLandingMsgSection, tbDecisionSection, tbMarketSection});
+    }
+    public void tbSetDecision(IFormReference ifr) {
+        ifr.addItemInCombo(tbDecisionLocal,decSubmit,decSubmit);
+        ifr.addItemInCombo(tbDecisionLocal,decDiscard,decDiscard);
+    }
+    private void tbInitiatorFormLoad (IFormReference ifr){
+    	setMandatory(ifr,new String [] {tbSelectMarketLocal,tbLandMsgLocal,tbDecisionLocal});
+    }
+    public void tbSendMail(IFormReference ifr){
+        String message = "A window open request for "+treasuryProcessName+" has been Initiated with ref number "+getWorkItemNumber(ifr)+".";
+        new MailSetup(ifr,getWorkItemNumber(ifr),getUsersMailsInGroup(ifr,groupName),empty,mailSubject,message);
+    }
+    
+    /******************  TREASURY BILL CODE ENDS ***********************************/
 }

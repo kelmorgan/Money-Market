@@ -15,6 +15,9 @@ import java.text.SimpleDateFormat;
 
 public class Commons implements Constants {
     private Logger logger = LogGen.getLoggerInstance(Commons.class);
+    String[] allTbSections = {tbMarketSection,tbLandingMsgSection ,tbTreasuryPriSection, tbTreasurySecSection,
+    		tbPrimaryBidSection, tbBranchSection, tbTerminationSection,tbProofOfInvestSection , tbDecisionSection ,
+    		tbTreasuryOpsSection ,tbTreasurySecReportSection ,tbPostSection };
 
     private String getTat (String entryDate, String exitDate){
         SimpleDateFormat sdf = new SimpleDateFormat(dbDateTimeFormat);
@@ -225,4 +228,101 @@ public class Commons implements Constants {
     public String getCpSmCusRefNo(IFormReference ifr){
         return null;
     }
+    
+    /******************  TREASURY BILL CODE BEGINS *********************************/
+    
+    public void hideTbSections (IFormReference ifr){
+    	hideFields(ifr,allTbSections);
+    }
+    public void disableTbSections (IFormReference ifr){
+    	disableFields(ifr,allTbSections);
+    }
+    
+    public void disableField(IFormReference ifr, String field) { 
+    	ifr.setStyle(field,disable,True);
+    }
+    public void clearField(IFormReference ifr, String field) {
+    	ifr.setValue(field,empty);
+    }
+    public void setVisible(IFormReference ifr, String field) { 
+    	ifr.setStyle(field,visible,True);
+    }
+    public void hideField(IFormReference ifr, String field) {
+    	ifr.setStyle(field,visible,False);
+    }
+    public void hideFields(IFormReference ifr, String [] fields ) { 
+    	for(String field: fields) ifr.setStyle(field,visible,False); 
+    }
+    public void enableField(IFormReference ifr, String field) {
+    	ifr.setStyle(field,disable,False);
+    }
+    public void setMandatory(IFormReference ifr, String field) { 
+    	ifr.setStyle(field,mandatory,True);
+    }
+    public void undoMandatory(IFormReference ifr, String field) { 
+    	ifr.setStyle(field,mandatory,False); 
+    }
+    public String getTbMarketName (IFormReference ifr){
+    	
+        if (getTbMarket(ifr).equalsIgnoreCase(tbPrimaryMarket)) 
+        	return primary;
+        else if (getProcess(ifr).equalsIgnoreCase(tbSecondaryMarket)) 
+        	return secondary;
+        return null;
+    }
+    public String getTbMarket(IFormReference ifr){
+    	return  (String) ifr.getValue(tbSelectMarketLocal);
+    }
+    
+    public void setTbDecisionHistory (IFormReference ifr){
+        String marketType = getCpMarketName(ifr);
+        String remarks = (String)ifr.getValue(tbRemarksLocal);
+        String entryDate = (String)ifr.getValue(entryDateLocal);
+        String exitDate = getCurrentDateTime();
+        setDecisionHistory(ifr,getLoginUser(ifr),treasuryProcessName,marketType,getCpDecision(ifr),remarks,getActivityName(ifr),entryDate,exitDate,getTat(entryDate,exitDate));
+        ifr.setValue(decHisFlagLocal,flag);
+    }
+    
+    public void porpulateCombo(IFormReference ifr, String comboCntrlName, String [] values){
+        ifr.clearCombo(comboCntrlName);
+        for (String value: values)
+            ifr.addItemInCombo(comboCntrlName,value,value);
+    }
+    public String getTbDecision (IFormReference ifr){
+        return (String) ifr.getValue(tbDecisionLocal);
+    }
+    public String getTbCategory(IFormReference ifr){
+    	return (String) ifr.getValue(tbCategoryLocal);
+    }
+    public String getTbUpdateMsg (IFormReference ifr){
+    	return (String) ifr.getValue(tbUpdateLocal);	
+    }
+    public void tbSetDecisionValue (IFormReference ifr, String value){
+    	ifr.setValue(tbDecisionLocal,value);
+    }
+    public String getTbOpenDate(IFormReference ifr){
+    	return (String)ifr.getValue(tbOpenDateLocal);
+    }
+    public String getTbCloseDate(IFormReference ifr){
+    	return (String)ifr.getValue(tbCloseDateLocal);
+    }
+    public String getTbUniqueRef(IFormReference ifr){
+    	return (String)ifr.getValue(tbUniqueRef);
+    }
+    public String getDateWithoutTime() {
+    	SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyy");
+    	try {
+    		return formatter.format(new Date());
+    	}
+    	catch (Exception e) {
+			logger.info("getDateWithoutTime Exception>>>"+e.toString());
+			return null;
+		}
+	}
+    
+    
+    
+  
+    
+    /******************  TREASURY BILL CODE ENDS ***********************************/
 }

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 public class BranchInitiator implements IFormServerEventHandler {
     @Override
     public void beforeFormLoad(FormDef formDef, IFormReference iFormReference) {
-
+        //kufre code
     }
 
     @Override

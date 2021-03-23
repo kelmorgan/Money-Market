@@ -21,6 +21,8 @@ public class TreasuryOfficerVerifier extends Commons implements IFormServerEvent
         clearDecHisFlag(ifr);
         if (!isEmpty(getProcess(ifr))) showSelectedProcessSheet(ifr);
         if (getProcess(ifr).equalsIgnoreCase(commercialProcess)) cpFormLoadActivity(ifr);
+        else if (getProcess(ifr).equalsIgnoreCase(treasuryProcess))
+        	tbFormLoadActivity(ifr);
     }
 
     @Override
@@ -97,6 +99,35 @@ public class TreasuryOfficerVerifier extends Commons implements IFormServerEvent
         ifr.addItemInCombo(cpDecisionLocal, decApprove, decApprove);
         ifr.addItemInCombo(cpDecisionLocal, decReject, decReject);
     }
+    
+    //*************** Treasury Start *************************/
+    
+    private void tbFormLoadActivity(IFormReference ifr){
+        hideTbSections(ifr);
+        hideShowLandingMessageLabel(ifr,False);
+        setGenDetails(ifr);
+        disableCpSections(ifr);
+        hideShowBackToDashboard(ifr,False);
+        //set controls for task to be performed
+        //approving of landing message 
+        if (getPrevWs(ifr).equalsIgnoreCase(treasuryOfficerInitiator) || getTbUpdateLocal(ifr)) { // for approval of landing page
+            setVisible(ifr,new String[] {tbLandingMsgSection,tbDecisionSection,tbMarketSection});
+            enableField(ifr,tbDecisionSection);
+            setMandatory(ifr, new String[]{tbDecisionLocal,tbRemarksLocal});
+        }
+        //Modification of Primary Market Cut-off Time 
+       // else if()
+       // tbSetDecision(ifr);
+    }
+
+    private void tbSetDecision(IFormReference ifr) {
+        ifr.clearCombo(tbDecisionLocal);
+        clearFields(ifr,new String[]{tbDecisionLocal,tbRemarksLocal});
+        ifr.addItemInCombo(tbDecisionLocal, decApprove, decApprove);
+        ifr.addItemInCombo(tbDecisionLocal, decReject, decReject);
+    }
+    
+    //*************** Treasury End *************************/
 
     @Override
     public JSONArray validateSubmittedForm(FormDef formDef, IFormReference iFormReference, String s) {

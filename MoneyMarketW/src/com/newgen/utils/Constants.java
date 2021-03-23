@@ -161,7 +161,7 @@ public interface Constants {
 	String tbOpenDateLocal = "tb_open_window_date";
 	String tbCloseDateLocal = "tb_close_window_date";
 	String tbPmMinPriAmtLocal = "tb_mp_amount";
-	String tbUniqueRef = "tb_mp_amount";
+	String tbUniqueRef = "tb_pmwu_ref";
 	
 	// tb sections
 	String tbMarketSection = "tb_market_section";

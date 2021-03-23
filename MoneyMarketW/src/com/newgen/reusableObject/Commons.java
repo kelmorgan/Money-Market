@@ -231,39 +231,18 @@ public class Commons implements Constants {
     
     /******************  TREASURY BILL CODE BEGINS *********************************/
     
-    public void hideTbSections (IFormReference ifr){
-    	hideFields(ifr,allTbSections);
-    }
-    public void disableTbSections (IFormReference ifr){
-    	disableFields(ifr,allTbSections);
-    }
+    public void hideTbSections (IFormReference ifr){hideFields(ifr,allTbSections);}
+    public void disableTbSections (IFormReference ifr){disableFields(ifr,allTbSections);}
+    public void disableField(IFormReference ifr, String field) {ifr.setStyle(field,disable,True);}
+    public void clearField(IFormReference ifr, String field) {ifr.setValue(field,empty);}
+    public void setVisible(IFormReference ifr, String field) { ifr.setStyle(field,visible,True);}
+    public void hideField(IFormReference ifr, String field) {ifr.setStyle(field,visible,False);}
+    public void hideFields(IFormReference ifr, String [] fields ) { for(String field: fields) ifr.setStyle(field,visible,False); }
+    public void enableField(IFormReference ifr, String field) {ifr.setStyle(field,disable,False);}
+    public void setMandatory(IFormReference ifr, String field) { ifr.setStyle(field,mandatory,True); }
+    public void undoMandatory(IFormReference ifr, String field) { ifr.setStyle(field,mandatory,False); }
     
-    public void disableField(IFormReference ifr, String field) { 
-    	ifr.setStyle(field,disable,True);
-    }
-    public void clearField(IFormReference ifr, String field) {
-    	ifr.setValue(field,empty);
-    }
-    public void setVisible(IFormReference ifr, String field) { 
-    	ifr.setStyle(field,visible,True);
-    }
-    public void hideField(IFormReference ifr, String field) {
-    	ifr.setStyle(field,visible,False);
-    }
-    public void hideFields(IFormReference ifr, String [] fields ) { 
-    	for(String field: fields) ifr.setStyle(field,visible,False); 
-    }
-    public void enableField(IFormReference ifr, String field) {
-    	ifr.setStyle(field,disable,False);
-    }
-    public void setMandatory(IFormReference ifr, String field) { 
-    	ifr.setStyle(field,mandatory,True);
-    }
-    public void undoMandatory(IFormReference ifr, String field) { 
-    	ifr.setStyle(field,mandatory,False); 
-    }
     public String getTbMarketName (IFormReference ifr){
-    	
         if (getTbMarket(ifr).equalsIgnoreCase(tbPrimaryMarket)) 
         	return primary;
         else if (getProcess(ifr).equalsIgnoreCase(tbSecondaryMarket)) 
@@ -288,27 +267,16 @@ public class Commons implements Constants {
         for (String value: values)
             ifr.addItemInCombo(comboCntrlName,value,value);
     }
-    public String getTbDecision (IFormReference ifr){
-        return (String) ifr.getValue(tbDecisionLocal);
-    }
-    public String getTbCategory(IFormReference ifr){
-    	return (String) ifr.getValue(tbCategoryLocal);
-    }
-    public String getTbUpdateMsg (IFormReference ifr){
-    	return (String) ifr.getValue(tbUpdateLocal);	
-    }
-    public void tbSetDecisionValue (IFormReference ifr, String value){
-    	ifr.setValue(tbDecisionLocal,value);
-    }
-    public String getTbOpenDate(IFormReference ifr){
-    	return (String)ifr.getValue(tbOpenDateLocal);
-    }
-    public String getTbCloseDate(IFormReference ifr){
-    	return (String)ifr.getValue(tbCloseDateLocal);
-    }
-    public String getTbUniqueRef(IFormReference ifr){
-    	return (String)ifr.getValue(tbUniqueRef);
-    }
+    
+    public boolean getTbUpdateLocal(IFormReference ifr){ return (boolean) ifr.getValue(tbUpdateLocal); }
+    public String getTbDecision (IFormReference ifr){return (String) ifr.getValue(tbDecisionLocal);}
+    public String getTbCategory(IFormReference ifr){return (String) ifr.getValue(tbCategoryLocal);}
+    public String getTbUpdateMsg (IFormReference ifr){return (String) ifr.getValue(tbUpdateLocal);}
+    public void setTbDecisionValue (IFormReference ifr, String value){ifr.setValue(tbDecisionLocal,value);}
+    public String getTbOpenDate(IFormReference ifr){return (String)ifr.getValue(tbOpenDateLocal);}
+    public String getTbCloseDate(IFormReference ifr){return (String)ifr.getValue(tbCloseDateLocal);}
+    public String getTbUniqueRef(IFormReference ifr){return (String)ifr.getValue(tbUniqueRef);}
+    
     public String getDateWithoutTime() {
     	SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyy");
     	try {
@@ -321,8 +289,6 @@ public class Commons implements Constants {
 	}
     
     
-    
-  
     
     /******************  TREASURY BILL CODE ENDS ***********************************/
 }

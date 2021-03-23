@@ -47,4 +47,8 @@ public class Query {
     public String getUpdateSetupQuery(String columnName,String value,String condition){
         return "update mm_setup_tbl set "+columnName+" = "+value+" where condition = "+condition+"";
     }
+    public String getTBInsertSetupQuery (){
+        return "insert into mm_setup_tbl (REFID,WINAME,PROCESS,MARKETTYPE,LANDINGMESSAGE,OPENDATE,CLOSEDATE,CLOSEFLAG) values (values)";
+        
+    }
 }

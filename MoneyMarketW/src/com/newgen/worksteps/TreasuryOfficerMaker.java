@@ -6,7 +6,10 @@ import com.newgen.iforms.custom.IFormReference;
 import com.newgen.iforms.custom.IFormServerEventHandler;
 import com.newgen.reusableObject.Commons;
 import com.newgen.reusableObject.CommonsI;
+import com.newgen.utils.DbConnect;
 import com.newgen.utils.LogGen;
+import com.newgen.utils.Query;
+
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 
@@ -74,7 +77,12 @@ public class TreasuryOfficerMaker extends Commons implements IFormServerEventHan
                 break;
                 case custom:{}
                 break;
-                case onDone:{}
+                case onDone:{
+                	
+                /**** Treasury onDOne Start ****/
+               
+                /**** Treasury onDone End  ****/
+                }
                 break;
                 case decisionHistory:{
                 	if (getProcess(ifr).equalsIgnoreCase(treasuryProcess)) setTbDecisionHistory(ifr);
@@ -202,7 +210,7 @@ public class TreasuryOfficerMaker extends Commons implements IFormServerEventHan
     
     /******************  TREASURY BILL CODE BEGINS *********************************/
     
-    public void tbFormLoadActivity(IFormReference ifr) {
+    private void tbFormLoadActivity(IFormReference ifr) {
     	//hide all sections except market, decision and lnading message
     	//disable landing msg section
     	setGenDetails(ifr);
@@ -225,7 +233,7 @@ public class TreasuryOfficerMaker extends Commons implements IFormServerEventHan
                         enableFields(ifr,new String[]{tbDecisionSection,tbCategoryLocal});
                         disableFields(ifr, new String[]{tbSelectMarketLocal,tbLandingMsgSection});
                         setMandatory(ifr,new String[] {tbDecisionLocal,tbRemarksLocal,tbCategoryLocal});
-                        porpulateCombo(ifr,cpCategoryLocal , new String[]{tbCategorySetup});
+                        porpulateCombo(ifr,tbCategoryLocal , new String[]{tbCategorySetup});
                     }
                 } 
                 else if (getTbMarket(ifr).equalsIgnoreCase(tbSecondaryMarket)) {
@@ -241,13 +249,13 @@ public class TreasuryOfficerMaker extends Commons implements IFormServerEventHan
         tbSetDecision(ifr);
     }
     
-    public void tbSetDecision(IFormReference ifr) {
+    private void tbSetDecision(IFormReference ifr) {
         clearFields(ifr,new String[]{tbDecisionLocal,tbRemarksLocal});
         setDecision(ifr,tbDecisionLocal,new String [] {decSubmit,decDiscard});
     }
-    public void tbCategoryChange(IFormReference ifr) throws ParseException{
+    private void tbCategoryChange(IFormReference ifr) throws ParseException{
         if (getTbMarket(ifr).equalsIgnoreCase(tbPrimaryMarket)){
-            if (getTbCategory(ifr).equalsIgnoreCase(tbCategorySetup)){
+            if (getTbCategory(ifr).equalsIgnoreCase(tbCategorySetup)){ //set up market
                 setVisible(ifr, new String [] {tbTreasuryPriSection,tbSetupSection,tbSetupWindowBtn,tbCutOffTimeSection});
                 setMandatory(ifr,new String[] {tbOpenDateLocal, tbPmMinPriAmtLocal,tbCloseDateLocal});
                 enableFields(ifr,new String[] {tbOpenDateLocal, tbPmMinPriAmtLocal,tbCloseDateLocal,tbSetupWindowBtn});
@@ -258,10 +266,10 @@ public class TreasuryOfficerMaker extends Commons implements IFormServerEventHan
         }
         else if (getCpMarket(ifr).equalsIgnoreCase(cpSecondaryMarket)){}
     }
-    public void tbUpdateLandingMsg(IFormReference ifr){
+    private void tbUpdateLandingMsg(IFormReference ifr){
         if (getTbUpdateMsg(ifr).equalsIgnoreCase(True)){
         	
-            tbSetDecisionValue(ifr,decSubmit);
+            setTbDecisionValue(ifr,decSubmit);
             ifr.setValue(tbRemarksLocal,"Kindly approve landing message update.");
             setInvisible(ifr, new String[]{tbSetupSection,tbDecisionSection});
             undoMandatory(ifr,new String[]{tbRemarksLocal,tbDecisionLocal});
@@ -278,7 +286,7 @@ public class TreasuryOfficerMaker extends Commons implements IFormServerEventHan
         }
     }
     
-    public String setupTbWindow (IFormReference ifr){
+    private String setupTbWindow (IFormReference ifr){
         if (isEmpty(getSetupFlag(ifr))){
             if (getTbMarket(ifr).equalsIgnoreCase(tbPrimaryMarket)){
                 if (compareDate(getTbOpenDate(ifr),getTbCloseDate(ifr))){}
@@ -293,10 +301,10 @@ public class TreasuryOfficerMaker extends Commons implements IFormServerEventHan
 
         return null;
     }
-    public void tbSendMail(IFormReference ifr) {
+    private void tbSendMail(IFormReference ifr) {
 
     }
-    public String generateTbUniqueReference(IFormReference ifr) {
+    private String generateTbUniqueReference(IFormReference ifr) {
     	//generate ref. check if its in db
     	 if (getTbMarket(ifr).equalsIgnoreCase(tbPrimaryMarket)){
     		 return "TBPMA"+getDateWithoutTime();	
@@ -306,11 +314,38 @@ public class TreasuryOfficerMaker extends Commons implements IFormServerEventHan
          }
     	 return null;
     }
-    public void setTbUniqueRef(IFormReference ifr) {
+    private void setTbUniqueRef(IFormReference ifr) {
     	if(isEmpty(getTbUniqueRef(ifr))){
     		ifr.setValue(tbUniqueRef,generateTbUniqueReference(ifr));
     	}
     }
+    
+    //onDone
+   /* private String tbOnDone(IFormReference ifr) {
+    	String retMsg ="";
+    	if(getTbDecision(ifr).equalsIgnoreCase(decSubmit)) {
+    		
+    		//check if market is set up -- save details in db
+    		 if (getTbCategory(ifr).equalsIgnoreCase(tbCategorySetup)){ //setupdone
+    			 String cols ="REFID,WINAME,PROCESS,MARKETTYPE,LANDINGMESSAGE,OPENDATE,CLOSEDATE,CLOSEFLAG";
+    			 String vals = "+"'"getTbUniqueRef"";
+    			 DbConnect dbConnect = new DbConnect(ifr, new Query().getInsertSetupQuery(cols,vals));
+    			 
+    		 }
+    	}
+    	return retMsg;
+    		
+    }
+    try {
+        DbConnect dbConnect = new DbConnect(ifr, new Query().getUsersInGroup(groupName));
+        for (int i = 0; i < dbConnect.getData().size(); i++){
+            groupMail = dbConnect.getData().get(i).get(0)+endMail+","+groupMail; }
+    } catch (Exception e){
+        logger.error("Exception occurred in getUsersMailInGroup Method-- "+ e.getMessage());
+        return null;
+    }
+    logger.info("getUsersMailsGroup method --mail of users-- "+groupMail.trim());
+    return groupMail.trim();*/
   
     
     /******************  TREASURY BILL CODE ENDS *********************************/

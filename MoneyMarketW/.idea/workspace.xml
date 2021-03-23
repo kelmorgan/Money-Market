@@ -1,54 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="50b917df-92d7-47a8-9712-94a1c2995317" name="Default Changelist" comment="" />
+    <list default="true" id="46354e8a-a3a7-44ea-96dd-0a3cf7648a5a" name="Default Changelist" comment="push from idea">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MoneyMarketW.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/External_lib.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MoneyMarket.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/iforms/user/MoneyMarketW.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/newgen/iforms/user/MoneyMarketW.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/reusableObject/Commons.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/utils/Constants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/utils/DbConnect.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/utils/LoadProp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/utils/LogGen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/utils/MailSetup.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/utils/Query.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/worksteps/AwaitingMaturity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/worksteps/BranchException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/worksteps/BranchInitiator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/worksteps/BranchVerifier.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/worksteps/Exit.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/worksteps/RpcVerifier.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/worksteps/TreasuryOfficerInitiator.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/newgen/worksteps/TreasuryOfficerInitiator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/worksteps/TreasuryOfficerMaker.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/worksteps/TreasuryOfficerVerifier.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/worksteps/TreasuryOpsFailed.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/worksteps/TreasuryOpsMature.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/worksteps/TreasuryOpsMatureOnMaturity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/worksteps/TreasuryOpsSuccessful.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/newgen/worksteps/TreasuryOpsVerifier.class" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectId" id="1pC2TBItvNflibR2GleyiDtOSOC" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1pDWkD9VbE0dgpnUnLouAY3FebM" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/wfdesktop.jar!/" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Cash-Indent/CI_Test" />
     <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="50b917df-92d7-47a8-9712-94a1c2995317" name="Default Changelist" comment="" />
-      <created>1614672756289</created>
+      <changelist id="46354e8a-a3a7-44ea-96dd-0a3cf7648a5a" name="Default Changelist" comment="" />
+      <created>1614718285635</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1614672756289</updated>
+      <updated>1614718285635</updated>
     </task>
+    <task id="LOCAL-00001" summary="push from idea">
+      <created>1614719170515</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1614719170515</updated>
+    </task>
+    <task id="LOCAL-00002" summary="push from idea">
+      <created>1614724406250</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1614724406250</updated>
+    </task>
+    <task id="LOCAL-00003" summary="push from idea">
+      <created>1614726089714</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1614726089714</updated>
+    </task>
+    <task id="LOCAL-00004" summary="push from idea">
+      <created>1614807224645</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1614807224645</updated>
+    </task>
+    <task id="LOCAL-00005" summary="push from Home Laptop idea">
+      <created>1614836228938</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1614836228938</updated>
+    </task>
+    <task id="LOCAL-00006" summary="push from idea">
+      <created>1614898668053</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1614898668053</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="-1208" y="-49" key="#Notifications" timestamp="1614673166601">
-      <screen x="-1600" y="-137" width="1600" height="860" />
-    </state>
-    <state x="-1208" y="-49" key="#Notifications/0.0.1366.728/-1600.-137.1600.860@-1600.-137.1600.860" timestamp="1614673166601" />
-    <state x="-1208" y="-49" key="#Project_Structure" timestamp="1614673282601">
-      <screen x="-1600" y="-137" width="1600" height="860" />
-    </state>
-    <state x="-1208" y="-49" key="#Project_Structure/0.0.1366.728/-1600.-137.1600.860@-1600.-137.1600.860" timestamp="1614673282601" />
-    <state x="-952" y="181" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1614672972556">
-      <screen x="-1600" y="-137" width="1600" height="860" />
-    </state>
-    <state x="-952" y="181" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1366.728/-1600.-137.1600.860@-1600.-137.1600.860" timestamp="1614672972556" />
-    <state x="-1094" y="34" key="FileChooserDialogImpl" timestamp="1614672874862">
-      <screen x="-1600" y="-137" width="1600" height="860" />
-    </state>
-    <state x="-1094" y="34" key="FileChooserDialogImpl/0.0.1366.728/-1600.-137.1600.860@-1600.-137.1600.860" timestamp="1614672874862" />
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="push from Home Laptop idea" />
+    <MESSAGE value="push from idea" />
+    <option name="LAST_COMMIT_MESSAGE" value="push from idea" />
   </component>
 </project>
